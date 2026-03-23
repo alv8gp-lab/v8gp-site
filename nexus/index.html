@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="V8 Nexus — a curated executive community for London's business leaders. Connect with decision-makers, access practical AI intelligence, and build the relationships that move business forward.">
+<meta property="og:title" content="V8 Nexus — London Executive Community">
+<meta property="og:url" content="https://www.v8gp.co.uk/nexus/">
+<title>V8 Nexus — London Executive Community</title>
+<link rel="canonical" href="https://www.v8gp.co.uk/nexus/">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#e0b84e;--gold-dim:rgba(224,184,78,0.14);--gold-border:rgba(224,184,78,0.35);
+  --bg:#08090f;--bg2:#10141f;--bg3:#0b0d16;
+  --text:#f7f4ed;--text-mid:#d6d2c8;--text-dim:#b0aca4;--text-faint:#686460;
+  --border:rgba(247,244,237,0.12);--border-light:rgba(247,244,237,0.20);--max:900px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,13,20,0.94);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.nav-back{font-size:13px;color:var(--text-dim);transition:color 0.2s;}
+.nav-back:hover{color:var(--text)}
+.nav-wordmark{display:flex;align-items:center;gap:10px;}
+.nav-v8{font-size:12px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-dim);}
+.nav-sep{width:1px;height:14px;background:var(--border-light)}
+.nav-nexus{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--text);letter-spacing:0.08em;position:relative;}
+.nav-nexus::after{content:'';position:absolute;bottom:-3px;left:0;width:100%;height:1.5px;background:var(--gold);}
+.nav-join{background:var(--gold);color:#0a0d14;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:8px 20px;border-radius:3px;transition:opacity 0.2s;}
+.nav-join:hover{opacity:0.85;}
+.page{max-width:var(--max);margin:0 auto;padding-top:60px;}
+.hero{
+  padding:0;
+  border-bottom:0.5px solid var(--gold-border);
+  position:relative;overflow:hidden;
+  min-height:520px;
+  display:flex;align-items:flex-end;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('/assets/img/hero-banner.jpg');
+  background-size:cover;background-position:center 30%;
+  z-index:0;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(8,9,15,0.45) 0%,
+    rgba(8,9,15,0.55) 40%,
+    rgba(8,9,15,0.88) 75%,
+    rgba(8,9,15,0.98) 100%
+  );
+  z-index:1;
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:72px 40px 60px;
+  width:100%;
+}
+.hero-content::before{content:'';position:absolute;top:-120px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(224,184,78,0.06) 0%,transparent 65%);pointer-events:none;z-index:0;}
+.hero-content>*{position:relative;z-index:1;}
+.badge{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);border:0.5px solid var(--gold);padding:4px 14px;border-radius:20px;margin-bottom:24px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:600;line-height:1.15;color:var(--text);max-width:600px;margin-bottom:22px;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero-lead{font-size:17px;font-weight:300;color:var(--text-mid);line-height:1.8;max-width:540px;margin-bottom:14px;}
+.hero-sub{font-size:15px;font-weight:300;color:var(--text-dim);line-height:1.8;max-width:520px;margin-bottom:36px;}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.btn-primary{background:var(--gold);color:#0a0d14;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:13px 28px;border-radius:4px;border:none;cursor:pointer;display:inline-block;transition:opacity 0.2s;}
+.btn-primary:hover{opacity:0.85}
+.btn-ghost{background:transparent;color:var(--gold);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;padding:13px 28px;border-radius:4px;border:0.5px solid var(--gold);cursor:pointer;display:inline-block;transition:background 0.2s;}
+.btn-ghost:hover{background:var(--gold-dim)}
+.partners{padding:20px 40px;border-bottom:0.5px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.partners-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint);white-space:nowrap;}
+.partner-tag{font-size:12px;color:var(--text-dim);border:0.5px solid var(--border-light);padding:4px 14px;border-radius:3px;}
+.section{padding:64px 40px;border-bottom:0.5px solid var(--border);}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.section-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:600;color:var(--text);margin-bottom:16px;line-height:1.25;}
+.section-lead{font-size:17px;font-weight:300;color:var(--text-mid);line-height:1.8;max-width:560px;margin-bottom:10px;}
+.section-sub{font-size:15px;color:var(--text-dim);line-height:1.8;max-width:560px;margin-bottom:40px;font-weight:300;}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.pillar{background:var(--bg2);border:0.5px solid var(--border);border-radius:6px;padding:28px 24px;transition:border-color 0.25s,background 0.25s;}
+.pillar:hover{border-color:var(--gold-border);background:#141929;}
+.pillar-icon{font-size:22px;margin-bottom:16px;display:block;}
+.pillar h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--text);margin-bottom:10px;}
+.pillar p{font-size:14px;color:var(--text-dim);line-height:1.75;font-weight:300;}
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.who-card{border-left:2px solid var(--gold);padding:20px;background:var(--gold-dim);border-radius:0 4px 4px 0;}
+.who-card h4{font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px;}
+.who-card p{font-size:14px;color:var(--text-dim);line-height:1.7;font-weight:300;}
+.gina-grid{display:grid;grid-template-columns:210px 1fr;gap:44px;align-items:start;}
+.gina-card{background:var(--bg2);border:0.5px solid var(--gold-border);border-radius:6px;padding:32px 22px;text-align:center;}
+.gina-photo{width:88px;height:88px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold-border);margin:0 auto 16px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.gina-photo img{width:100%;height:100%;object-fit:cover;}
+.gina-initials{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold);}
+.gina-card h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);margin-bottom:6px;}
+.gina-card .role{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.6;}
+.gina-content blockquote{font-family:'Playfair Display',serif;font-size:21px;font-weight:400;font-style:italic;color:var(--text);line-height:1.5;border-left:2px solid var(--gold);padding-left:20px;margin-bottom:22px;}
+.gina-content p{font-size:15px;color:var(--text-dim);line-height:1.8;margin-bottom:14px;font-weight:300;}
+.notebook{background:var(--bg2);border:0.5px solid var(--gold-border);border-radius:8px;padding:40px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start;}
+.free-tag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#0a0d14;background:var(--gold);padding:3px 12px;border-radius:3px;margin-bottom:16px;}
+.notebook h3{font-family:'Playfair Display',serif;font-size:23px;color:var(--text);margin-bottom:14px;line-height:1.3;}
+.notebook-lead{font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:8px;font-weight:300;}
+.notebook-sub{font-size:14px;color:var(--text-dim);line-height:1.75;margin-bottom:24px;font-weight:300;}
+.nb-features{list-style:none;margin-bottom:28px;}
+.nb-features li{font-size:14px;color:var(--text-mid);padding:7px 0 7px 20px;position:relative;font-weight:300;border-bottom:0.5px solid rgba(240,237,230,0.05);}
+.nb-features li:last-child{border-bottom:none;}
+.nb-features li::before{content:'';position:absolute;left:0;top:15px;width:6px;height:6px;border-radius:50%;background:var(--gold);}
+.nb-visual{background:var(--bg3);border:0.5px solid var(--border);border-radius:6px;padding:24px;}
+.nb-visual-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:16px;font-weight:500;}
+.nb-module{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:0.5px solid rgba(240,237,230,0.06);}
+.nb-module:last-child{border-bottom:none;}
+.nb-num{font-size:11px;font-weight:500;color:var(--gold);min-width:20px;padding-top:2px;}
+.nb-text{font-size:13px;color:var(--text-dim);font-weight:300;line-height:1.55;}
+.join-section{padding:64px 40px;text-align:center;}
+.join-section h2{font-family:'Playfair Display',serif;font-size:36px;color:var(--text);margin-bottom:16px;}
+.join-lead{font-size:17px;color:var(--text-mid);max-width:460px;margin:0 auto 10px;line-height:1.75;font-weight:300;}
+.join-sub{font-size:14px;color:var(--text-dim);max-width:420px;margin:0 auto 40px;line-height:1.75;font-weight:300;}
+.form-wrap{max-width:480px;margin:0 auto;text-align:left;}
+.form-row{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.nx-input{flex:1;min-width:180px;background:var(--bg2);border:0.5px solid var(--border-light);border-radius:4px;padding:12px 18px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color 0.2s;width:100%;}
+.nx-input:focus{border-color:rgba(201,168,76,0.6);}
+.nx-input::placeholder{color:var(--text-faint);}
+.nx-select{flex:1;min-width:180px;background:var(--bg2);border:0.5px solid var(--border-light);border-radius:4px;padding:12px 18px;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text-dim);outline:none;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a9690' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;width:100%;}
+.nx-select:focus{border-color:rgba(201,168,76,0.6);}
+.nx-select option{background:#111520;color:var(--text);}
+.captcha-row{display:flex;justify-content:center;margin:18px 0;}
+.submit-btn{width:100%;background:var(--gold);color:#0a0d14;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;padding:14px 28px;border-radius:4px;border:none;cursor:pointer;transition:opacity 0.2s;margin-bottom:16px;}
+.submit-btn:hover{opacity:0.85;}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.form-note{font-size:13px;color:var(--text-faint);font-weight:300;text-align:center;line-height:1.6;}
+.form-success{display:none;background:var(--bg2);border:0.5px solid var(--gold-border);border-radius:6px;padding:40px 28px;text-align:center;}
+.form-success h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--text);margin-bottom:12px;}
+.form-success p{font-size:15px;color:var(--text-dim);font-weight:300;line-height:1.75;}
+.form-error{display:none;font-size:14px;color:#e24b4a;margin-bottom:14px;padding:12px 16px;background:rgba(226,75,74,0.08);border-radius:4px;border:0.5px solid rgba(226,75,74,0.2);}
+.page-footer{padding:28px 40px;border-top:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.page-footer p{font-size:13px;color:var(--text-faint);font-weight:300;}
+.page-footer a{font-size:13px;color:var(--text-faint);transition:color 0.2s;}
+.page-footer a:hover{color:var(--gold);}
+@media(max-width:640px){
+  nav{padding:0 20px;}
+  .hero{min-height:420px;}
+  .hero-content{padding:44px 24px 40px;}
+  .hero h1{font-size:34px;}
+  .hero-lead,.section-lead,.join-lead{font-size:16px;}
+  .section{padding:48px 24px;}
+  .section-title{font-size:26px;}
+  .pillars,.who-grid{grid-template-columns:1fr;}
+  .gina-grid{grid-template-columns:1fr;}
+  .notebook{grid-template-columns:1fr;padding:28px 24px;}
+  .partners{padding:16px 24px;}
+  .join-section{padding:48px 24px;}
+  .join-section h2{font-size:28px;}
+  .page-footer{padding:24px;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-back" href="/">← V8 Global</a>
+  <div class="nav-wordmark">
+    <span class="nav-v8">V8</span>
+    <div class="nav-sep"></div>
+    <span class="nav-nexus">NEXUS</span>
+  </div>
+  <a class="nav-join" href="#join">Express interest</a>
+</nav>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="badge">London Executive Community</div>
+      <h1>Where London's business leaders <em>actually</em> connect.</h1>
+      <p class="hero-lead">V8 Nexus is a curated membership community for established business owners, senior professionals, and growth-focused entrepreneurs in London.</p>
+      <p class="hero-sub">We combine high-trust human networks with practical AI and Martech intelligence — so members leave every event with relationships that open doors, and tools that reduce the work of maintaining them.</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="#join">Express interest to join</a>
+        <a class="btn-ghost" href="#notebook">Get the free AI toolkit</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="partners">
+    <span class="partners-label">Community partners</span>
+    <span class="partner-tag">iFast Bank</span>
+    <span class="partner-tag">Hongkonger Magazine</span>
+    <span class="partner-tag">V8 Global</span>
+  </div>
+
+  <div class="section">
+    <div class="section-label">What V8 Nexus is</div>
+    <div class="section-title">Three things most business communities don't deliver.</div>
+    <p class="section-lead">Most professional networks offer a room, a schedule, and a pile of business cards. V8 Nexus is built around three principles that make those introductions worth something.</p>
+    <p class="section-sub">Every event, every introduction, and every resource in the community is designed to serve one of these:</p>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-icon">🤝</span>
+        <h3>Connect</h3>
+        <p>Introductions are curated, not random. Every member is vetted. Every event is designed to surface genuine synergies — between people who can actually do business together, refer each other, or build something jointly.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">⚡</span>
+        <h3>Innovate</h3>
+        <p>Members get direct access to practical AI and Martech intelligence — not theory. Seminars are built around what SME owners and professionals can implement the same week, without a technical team behind them.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-icon">🚀</span>
+        <h3>Accelerate</h3>
+        <p>The V8 Engine gives members access to the tools, frameworks, and partner network that V8 Global uses with its own clients — compressed into a format that works for busy professionals who need outcomes, not projects.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Who this is for</div>
+    <div class="section-title">Quality over quota.<br>Standards over size.</div>
+    <p class="section-sub">V8 Nexus grows with the right people — there's no fixed cap, and we actively want it to be bigger. What we're selective about is quality. Members are admitted on the basis of professional standing, genuine contribution, and relevance to the community. If you're in, so is everyone else in the room.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <h4>Established business owners</h4>
+        <p>Founders and owners with proven businesses looking to scale intelligently, modernise their operations, and build the kind of strategic partnerships that don't come from general networking events.</p>
+      </div>
+      <div class="who-card">
+        <h4>Senior professionals</h4>
+        <p>Partners, directors, and senior advisors in legal, finance, real estate, and consulting. People whose value to the room is their expertise, their network, and their ability to open the right doors.</p>
+      </div>
+      <div class="who-card">
+        <h4>Growth-minded entrepreneurs</h4>
+        <p>Entrepreneurs actively integrating AI and modern technology into their business model — who want to be in the room with peers who understand why that matters, not just what it does.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Community lead</div>
+    <div class="gina-grid">
+      <div class="gina-card">
+        <div class="gina-photo">
+          <img src="/assets/img/gina-cheng.jpg" alt="Gina Cheng">
+        </div>
+        <h3>Gina Cheng</h3>
+        <p class="role">Community Lead, V8 Nexus<br><br>LinkedIn Strategist<br>Personal Branding Specialist</p>
+      </div>
+      <div class="gina-content">
+        <blockquote>"The problem with most London networking isn't the lack of events — it's that the right people are spread across a dozen of them and never properly introduced."</blockquote>
+        <p>Gina Cheng built V8 Nexus to solve a specific problem she kept running into: too many rooms full of interesting people who left without ever talking to the one person who could have changed something for them.</p>
+        <p>Her background is in LinkedIn strategy and personal branding — which means she understands exactly how professional relationships are built, maintained, and converted into real business outcomes. That thinking shapes every aspect of how V8 Nexus operates: who gets invited, how introductions are made, and what members take away beyond a contact list.</p>
+        <p>V8 Nexus is backed by Alan Law and the V8 Global team — over a decade of Martech experience, 700+ SME clients served, and active operations across London, Hong Kong, and internationally. iFast Bank and Hongkonger Magazine are founding community partners.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="notebook">
+    <div class="section-label">Member resource — included on joining</div>
+    <div class="section-title">The AI toolkit that makes the community work harder for you.</div>
+    <p class="section-lead">Every V8 Nexus member receives the AI Toolkit Notebook on joining — free, with no separate signup required.</p>
+    <p class="section-sub">The notebook exists because the community's value doesn't stop at the event. Between meetings, members need to maintain relationships, stay visible, and keep up with the platforms and tools their clients and peers are using. The toolkit makes that manageable — without a marketing team or a heavy time commitment.</p>
+    <div class="notebook">
+      <div>
+        <span class="free-tag">Included with membership</span>
+        <h3>The V8 AI Toolkit Notebook</h3>
+        <p class="notebook-lead">A practical, step-by-step guide to using AI as a genuine business tool — not just a content generator.</p>
+        <p class="notebook-sub">Built from the same systems V8 Global uses with its own clients. Currently available on Claude — Gemini and ChatGPT versions coming soon.</p>
+        <ul class="nb-features">
+          <li>Write social content that sounds like you, not like an AI wrote it</li>
+          <li>Stay current with platform algorithm changes — without following every update yourself</li>
+          <li>Use AI to prepare for meetings, research prospects, and follow up faster</li>
+          <li>Build a personal AI setup that understands your business context and pushes back productively</li>
+          <li>Manage client communication and pipeline at a pace previously only possible with a team</li>
+        </ul>
+        <a class="btn-primary" href="#join">Join to get access</a>
+      </div>
+      <div class="nb-visual">
+        <div class="nb-visual-label">What's inside — six sections</div>
+        <div class="nb-module"><span class="nb-num">01</span><span class="nb-text">Why most people use AI wrong — and the mindset shift that changes everything</span></div>
+        <div class="nb-module"><span class="nb-num">02</span><span class="nb-text">How to configure AI to know your business, not just respond to prompts</span></div>
+        <div class="nb-module"><span class="nb-num">03</span><span class="nb-text">Creating content that fits the algorithm — updated automatically, not guessed</span></div>
+        <div class="nb-module"><span class="nb-num">04</span><span class="nb-text">Building your first personal AI skill — step by step, under 30 minutes</span></div>
+        <div class="nb-module"><span class="nb-num">05</span><span class="nb-text">The five questions that separate useful AI setups from generic ones</span></div>
+        <div class="nb-module"><span class="nb-num">06</span><span class="nb-text">What a professional AI toolkit looks like — and how to get there</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="join-section" id="join">
+    <div class="badge">Membership</div>
+    <h2>Ready to be considered?</h2>
+    <p class="join-lead">V8 Nexus admits members by application. Leave your details below and Gina will review your submission personally.</p>
+    <p class="join-sub">If there's a fit — for you and for the community — she'll be in touch to arrange a conversation. No automated responses, no sales sequence.</p>
+    <div class="form-wrap">
+      <div class="form-error" id="formError"></div>
+      <form id="nexusForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <input class="nx-input" type="text" id="fname" placeholder="First name" required>
+          <input class="nx-input" type="text" id="lname" placeholder="Last name">
+        </div>
+        <div class="form-row">
+          <input class="nx-input" type="email" id="email" placeholder="Email address" required>
+        </div>
+        <div class="form-row">
+          <input class="nx-input" type="text" id="business" placeholder="Your business or organisation" required style="min-width:100%;">
+        </div>
+        <div class="form-row">
+          <select class="nx-select" id="sector">
+            <option value="" disabled selected>Your sector</option>
+            <option>Business owner / Entrepreneur</option>
+            <option>Legal</option>
+            <option>Finance / Banking</option>
+            <option>Real estate</option>
+            <option>Consulting</option>
+            <option>Technology</option>
+            <option>Marketing / Media</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="captcha-row">
+          <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY" data-theme="dark"></div>
+        </div>
+        <input type="hidden" id="utm_source">
+        <input type="hidden" id="utm_medium">
+        <input type="hidden" id="utm_campaign">
+        <input type="hidden" id="utm_content">
+        <input type="hidden" id="page_source" value="v8nexus-intro-page">
+        <button class="submit-btn" type="submit" id="submitBtn">Submit my application &#x2192;</button>
+        <p class="form-note">Members receive the free AI Toolkit Notebook on joining. Your details are reviewed personally by Gina — not processed by an automated system.</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <h3>Application received.</h3>
+        <p>Gina will review your submission and be in touch personally if there's a good fit. In the meantime, watch your inbox — your free AI Toolkit Notebook will arrive shortly.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <p>&#169; 2026 V8 Global Company Limited. V8 Nexus is a curated executive community based in London.</p>
+    <a href="/">&#x2190; Back to V8 Global</a>
+  </div>
+
+</div>
+<script>
+(function(){
+  var p=new URLSearchParams(window.location.search);
+  ['utm_source','utm_medium','utm_campaign','utm_content'].forEach(function(k){
+    var el=document.getElementById(k);
+    if(el&&p.get(k))el.value=p.get(k);
+  });
+})();
+async function handleSubmit(e){
+  e.preventDefault();
+  var btn=document.getElementById('submitBtn');
+  var errBox=document.getElementById('formError');
+  errBox.style.display='none';
+  var cap=typeof grecaptcha!=='undefined'?grecaptcha.getResponse():'dev-bypass';
+  if(!cap){errBox.textContent='Please complete the captcha to continue.';errBox.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Submitting\u2026';
+  var payload={
+    fname:document.getElementById('fname').value.trim(),
+    lname:document.getElementById('lname').value.trim(),
+    email:document.getElementById('email').value.trim(),
+    business:document.getElementById('business').value.trim(),
+    sector:document.getElementById('sector').value,
+    utm_source:document.getElementById('utm_source').value,
+    utm_medium:document.getElementById('utm_medium').value,
+    utm_campaign:document.getElementById('utm_campaign').value,
+    utm_content:document.getElementById('utm_content').value,
+    page_source:document.getElementById('page_source').value,
+    captcha:cap
+  };
+  try{
+    var res=await fetch('https://api.v8gp.co.uk/nexus-signup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if(res.ok){document.getElementById('nexusForm').style.display='none';document.getElementById('formSuccess').style.display='block';}
+    else{throw new Error('err');}
+  }catch(err){
+    errBox.textContent='Something went wrong \u2014 please try again or contact us at info@v8gp.co.uk';
+    errBox.style.display='block';btn.disabled=false;btn.textContent='Submit my application \u2192';
+    if(typeof grecaptcha!=='undefined')grecaptcha.reset();
+  }
+}
+</script>
+</body>
+</html>

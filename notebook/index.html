@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The V8 AI Toolkit Notebook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#e0b84e;
+  --gold-dim:rgba(224,184,78,0.12);
+  --gold-border:rgba(224,184,78,0.3);
+  --bg:#08090f;
+  --bg2:#10141f;
+  --bg3:#0b0d16;
+  --bg-code:#0e1118;
+  --text:#f7f4ed;
+  --text-mid:#d6d2c8;
+  --text-dim:#b0aca4;
+  --text-faint:#686460;
+  --border:rgba(247,244,237,0.10);
+  --border-light:rgba(247,244,237,0.18);
+  --red:#e85c5c;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:16px;
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── SIDEBAR NAV ── */
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+
+.sidebar{
+  position:fixed;top:0;left:0;bottom:0;width:240px;
+  background:var(--bg2);
+  border-right:0.5px solid var(--border);
+  padding:0;
+  overflow-y:auto;
+  z-index:50;
+}
+.sidebar-banner{
+  height:100px;
+  background-image:url('/assets/img/hero-banner.jpg');
+  background-size:cover;background-position:center 40%;
+  position:relative;flex-shrink:0;
+}
+.sidebar-banner::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(8,9,15,0.3),rgba(8,9,15,0.85));
+}
+.sidebar-inner{padding:20px 24px 32px;}
+.sidebar-logo{
+  font-family:'Playfair Display',serif;
+  font-size:15px;font-weight:600;
+  color:var(--text);
+  letter-spacing:0.06em;
+  margin-bottom:6px;
+}
+.sidebar-sub{
+  font-size:11px;font-weight:400;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:32px;
+}
+.sidebar-label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--text-faint);
+  margin-bottom:12px;margin-top:24px;
+}
+.nav-items{list-style:none;}
+.nav-items a{
+  display:block;
+  font-size:13px;font-weight:300;
+  color:var(--text-dim);
+  padding:7px 0;
+  border-left:2px solid transparent;
+  padding-left:12px;
+  margin-left:-12px;
+  text-decoration:none;
+  transition:color 0.2s,border-color 0.2s;
+  line-height:1.4;
+}
+.nav-items a:hover{color:var(--text);border-left-color:var(--gold);}
+.nav-items a.active{color:var(--gold);border-left-color:var(--gold);}
+.nav-num{
+  font-size:10px;font-weight:500;
+  color:var(--text-faint);
+  margin-right:6px;letter-spacing:0.06em;
+}
+.sidebar-divider{
+  height:0.5px;background:var(--border);
+  margin:24px 0;
+}
+.sidebar-cta{
+  display:block;
+  background:var(--gold);color:#08090f;
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;font-weight:500;
+  padding:10px 16px;border-radius:3px;
+  text-decoration:none;text-align:center;
+  transition:opacity 0.2s;
+  margin-top:8px;
+}
+.sidebar-cta:hover{opacity:0.85;}
+
+/* ── MAIN CONTENT ── */
+.main{
+  margin-left:240px;
+  max-width:720px;
+  padding:60px 64px 120px;
+}
+
+/* ── COVER ── */
+.cover{
+  padding-bottom:56px;
+  border-bottom:0.5px solid var(--gold-border);
+  margin-bottom:72px;
+  position:relative;
+}
+.cover-eyebrow{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+}
+.cover h1{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:600;
+  line-height:1.12;color:var(--text);
+  margin-bottom:20px;
+}
+.cover h1 em{font-style:italic;color:var(--gold);}
+.cover-intro{
+  font-size:17px;font-weight:300;
+  color:var(--text-mid);line-height:1.85;
+  max-width:560px;margin-bottom:32px;
+}
+.cover-meta{
+  display:flex;gap:32px;flex-wrap:wrap;
+}
+.cover-meta-item{
+  font-size:13px;color:var(--text-dim);font-weight:300;
+}
+.cover-meta-item strong{
+  display:block;font-size:11px;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text-faint);margin-bottom:3px;
+}
+
+/* ── SECTION ── */
+.nb-section{
+  margin-bottom:80px;
+  scroll-margin-top:40px;
+}
+.section-num{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:12px;
+}
+.nb-section h2{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:600;
+  color:var(--text);
+  line-height:1.2;margin-bottom:20px;
+}
+.nb-section h3{
+  font-family:'Playfair Display',serif;
+  font-size:20px;font-weight:600;
+  color:var(--text);
+  line-height:1.3;margin:32px 0 12px;
+}
+.nb-section p{
+  font-size:16px;font-weight:300;
+  color:var(--text-mid);
+  line-height:1.85;margin-bottom:18px;
+}
+.nb-section p strong{
+  font-weight:500;color:var(--text);
+}
+
+/* ── CALLOUT BLOCKS ── */
+.callout{
+  border-left:3px solid var(--gold);
+  background:var(--gold-dim);
+  padding:20px 24px;
+  border-radius:0 6px 6px 0;
+  margin:28px 0;
+}
+.callout p{
+  font-size:15px;color:var(--text);
+  margin:0;font-weight:300;line-height:1.75;
+}
+.callout-label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+}
+
+.warning{
+  border-left:3px solid var(--red);
+  background:rgba(232,92,92,0.08);
+  padding:20px 24px;
+  border-radius:0 6px 6px 0;
+  margin:28px 0;
+}
+.warning p{color:var(--text-mid);font-size:15px;margin:0;line-height:1.75;}
+.warning-label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);margin-bottom:8px;
+}
+
+/* ── CODE BLOCK ── */
+.code-block{
+  background:var(--bg-code);
+  border:0.5px solid var(--border-light);
+  border-radius:6px;
+  padding:24px 28px;
+  margin:24px 0;
+  overflow-x:auto;
+}
+.code-block-label{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--text-faint);margin-bottom:14px;
+}
+.code-block pre{
+  font-family:'DM Mono',monospace;
+  font-size:13px;color:var(--text-dim);
+  line-height:1.7;white-space:pre-wrap;
+  word-break:break-word;
+}
+.code-block pre .key{color:var(--gold);}
+.code-block pre .val{color:#9ecfff;}
+.code-block pre .comment{color:var(--text-faint);}
+
+/* ── FIVE QUESTIONS ── */
+.questions-list{list-style:none;margin:24px 0;}
+.questions-list li{
+  display:grid;grid-template-columns:auto 1fr;
+  gap:16px;align-items:start;
+  padding:18px 0;
+  border-bottom:0.5px solid var(--border);
+}
+.questions-list li:last-child{border-bottom:none;}
+.q-num{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:600;
+  color:var(--gold);opacity:0.5;
+  line-height:1;padding-top:2px;
+  min-width:28px;
+}
+.q-text h4{
+  font-size:15px;font-weight:500;
+  color:var(--text);margin-bottom:6px;
+}
+.q-text p{
+  font-size:14px;color:var(--text-dim);
+  margin:0;line-height:1.7;font-weight:300;
+}
+.q-text .example{
+  font-size:13px;color:var(--text-faint);
+  font-style:italic;margin-top:6px;
+}
+
+/* ── CAPABILITY TABLE ── */
+.cap-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin:24px 0;
+}
+.cap-card{
+  background:var(--bg2);
+  border:0.5px solid var(--border);
+  border-radius:6px;padding:20px 18px;
+}
+.cap-card h4{
+  font-size:13px;font-weight:500;
+  color:var(--gold);margin-bottom:8px;
+  letter-spacing:0.04em;
+}
+.cap-card p{
+  font-size:13px;color:var(--text-dim);
+  margin:0;line-height:1.65;font-weight:300;
+}
+
+/* ── CTA BLOCK ── */
+.cta-block{
+  background:var(--bg2);
+  border:0.5px solid var(--gold-border);
+  border-radius:8px;
+  padding:40px;
+  text-align:center;
+  margin-top:80px;
+}
+.cta-block h2{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:600;
+  color:var(--text);margin-bottom:12px;
+}
+.cta-block p{
+  font-size:15px;color:var(--text-mid);
+  max-width:440px;margin:0 auto 28px;
+  line-height:1.8;font-weight:300;
+}
+.cta-pack-details{
+  display:flex;justify-content:center;gap:24px;
+  margin-bottom:28px;flex-wrap:wrap;
+}
+.pack-item{
+  font-size:13px;color:var(--text-dim);
+  background:var(--bg3);
+  border:0.5px solid var(--border-light);
+  padding:8px 16px;border-radius:3px;
+  font-weight:300;
+}
+.pack-item strong{color:var(--text);font-weight:500;}
+.btn-cta{
+  display:inline-block;
+  background:var(--gold);color:#08090f;
+  font-family:'DM Sans',sans-serif;
+  font-size:15px;font-weight:500;
+  padding:13px 32px;border-radius:4px;
+  text-decoration:none;
+  transition:opacity 0.2s;
+  margin-bottom:14px;
+}
+.btn-cta:hover{opacity:0.85;}
+.cta-note{
+  font-size:12px;color:var(--text-faint);font-weight:300;
+}
+
+/* ── DIVIDER ── */
+.section-divider{
+  height:0.5px;background:var(--border);
+  margin:72px 0;
+}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{
+    position:static;width:100%;
+    border-right:none;border-bottom:0.5px solid var(--border);
+    padding:0;
+  }
+  .sidebar-banner{height:80px;}
+  .sidebar-inner{padding:16px 20px 20px;}
+  .main{margin-left:0;padding:40px 24px 80px;}
+  .cover h1{font-size:34px;}
+  .nb-section h2{font-size:26px;}
+  .cap-grid{grid-template-columns:1fr;}
+  .cta-block{padding:28px 20px;}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-banner"></div>
+  <div class="sidebar-inner">
+  <div class="sidebar-logo">V8 AI Toolkit</div>
+  <div class="sidebar-sub">Member Notebook</div>
+
+  <div class="sidebar-label">Contents</div>
+  <ul class="nav-items">
+    <li><a href="#cover"><span class="nav-num">—</span>Introduction</a></li>
+    <li><a href="#s01"><span class="nav-num">01</span>Why you're using AI wrong</a></li>
+    <li><a href="#s02"><span class="nav-num">02</span>The moment it proved itself</a></li>
+    <li><a href="#s03"><span class="nav-num">03</span>What a skill actually is</a></li>
+    <li><a href="#s04"><span class="nav-num">04</span>Build your first skill</a></li>
+    <li><a href="#s05"><span class="nav-num">05</span>Five questions every skill must answer</a></li>
+    <li><a href="#s06"><span class="nav-num">06</span>What a professional toolkit looks like</a></li>
+  </ul>
+
+  <div class="sidebar-divider"></div>
+  <div class="sidebar-label">Ready to go further?</div>
+  <p style="font-size:12px;color:var(--text-faint);font-weight:300;line-height:1.6;margin-bottom:12px;">The Thinking Partner Pack gives you three professional skills, built and ready to deploy.</p>
+  <a class="sidebar-cta" href="#s06">See what's included →</a>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- COVER -->
+  <div class="cover" id="cover">
+    <div class="cover-eyebrow">V8 Nexus — Member Resource</div>
+    <h1>The V8 AI<br><em>Toolkit</em> Notebook</h1>
+    <p class="cover-intro">Most professionals use AI like a better search engine. This notebook teaches you to use it like a thinking partner — one that knows your business, challenges your reasoning, writes your content, and keeps up with the platforms you rely on.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-item"><strong>Platform</strong>Claude (Anthropic)</div>
+      <div class="cover-meta-item"><strong>Time required</strong>30–45 minutes to build your first skill</div>
+      <div class="cover-meta-item"><strong>Level</strong>No technical knowledge needed</div>
+      <div class="cover-meta-item"><strong>Coming soon</strong>Gemini · ChatGPT versions</div>
+    </div>
+  </div>
+
+  <!-- 01 -->
+  <div class="nb-section" id="s01">
+    <div class="section-num">Section 01</div>
+    <h2>Why asking AI for answers is the wrong move.</h2>
+
+    <p>Open a blank Claude conversation and ask it to review your business strategy. It will give you a thorough, balanced, thoughtful response that agrees with most of what you said and gently flags a few things to consider.</p>
+
+    <p>That response is useless.</p>
+
+    <p>Not because Claude is bad at strategy — it isn't. But because a blank Claude has no idea who you are, what standards you hold yourself to, what you've already tried, or what kind of feedback actually helps you think. It's responding to your words, not to you. So it defaults to the safest, most agreeable version of whatever you asked.</p>
+
+    <div class="callout">
+      <div class="callout-label">The core problem</div>
+      <p>A blank AI is optimised to be helpful in the generic sense. Your job is to make it helpful in the specific sense — for your business, your voice, your standards. That's what this notebook teaches you to do.</p>
+    </div>
+
+    <h3>The blank slate problem</h3>
+    <p>Every time you open a new conversation, Claude starts fresh. It doesn't remember that you hate corporate jargon, that you've already tried the obvious LinkedIn strategy, that your clients are senior finance professionals who will see through anything that sounds like a template.</p>
+
+    <p>This isn't a flaw — it's a design choice. The problem is that most people never solve it. They keep prompting a blank slate and then wondering why the outputs feel generic.</p>
+
+    <p>The solution isn't a better prompt. It's a <strong>configured AI</strong> — one that runs with a set of instructions before every conversation even begins. Those instructions are called skills.</p>
+
+    <div class="warning">
+      <div class="warning-label">What this notebook is not</div>
+      <p>This is not a prompt library. Collecting prompts is like collecting recipes without learning to cook — you'll always be dependent on someone else's version. This notebook teaches you to build the system, so the prompts you need emerge naturally from how you've configured your AI.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- 02 -->
+  <div class="nb-section" id="s02">
+    <div class="section-num">Section 02</div>
+    <h2>How this system was built — and the moment it proved itself.</h2>
+
+    <p>The skills framework in this notebook was developed by Alan Law, founder of V8 Global, while building the company's own AI marketing infrastructure. It started as a practical solution to a specific problem: how do you get consistent, high-quality output from an AI system when you're running multiple client accounts, operating across time zones, and can't afford to re-explain your standards every session?</p>
+
+    <p>The answer was to encode those standards into reusable skill files — structured instruction sets that load before any conversation begins. Every session starts with the AI already knowing your methodology, your voice, your non-negotiables, and your research standards.</p>
+
+    <h3>The moment it proved itself.</h3>
+    <p>The real test came when Alan shared a piece of AI-assisted content that pushed back against a popular industry claim — directly contradicting what several well-followed voices in the space had been saying. The post cited sources, flagged the conflicting data, and drew a clear distinction between a growth rate and an absolute figure.</p>
+
+    <p>The immediate reaction was pushback. Then, over 48 hours, the engagement compounded — sharing, saving, and replies from people who said it was the first time they'd seen the claim properly interrogated. The reach was <strong>76 times</strong> what a typical post generated.</p>
+
+    <div class="callout">
+      <div class="callout-label">What this showed</div>
+      <p>A configured AI that's been told to verify claims, distinguish data from inference, and flag weak sourcing produces fundamentally different output to a generic one. The content wasn't viral because it was clever — it was credible. That credibility came from the skill.</p>
+    </div>
+
+    <p>You can watch the full breakdown of what happened and why on the V8 Global YouTube channel. The link is in your welcome email.</p>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- 03 -->
+  <div class="nb-section" id="s03">
+    <div class="section-num">Section 03</div>
+    <h2>What a skill actually is — in plain English.</h2>
+
+    <p>Forget the technical framing. A skill is a set of instructions that runs before every conversation. That's it.</p>
+
+    <p>When you upload a skill to Claude, those instructions become part of how Claude thinks throughout the session. It's not a prompt you type — it's a configuration that's already active when you open the chat. Like hiring someone who's already been briefed, rather than starting from scratch every time.</p>
+
+    <h3>The basic structure</h3>
+    <p>A skill file is a plain text document with a <code style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);background:var(--bg-code);padding:2px 6px;border-radius:3px;">.md</code> extension — standard Markdown. Claude reads it as a structured set of instructions. Here's the skeleton every skill is built on:</p>
+
+    <div class="code-block">
+      <div class="code-block-label">Skill file structure — template</div>
+      <pre><span class="comment">---</span>
+<span class="key">name:</span> <span class="val">your-skill-name</span>
+<span class="key">description:</span> <span class="val">One sentence on what this skill does</span>
+<span class="comment">---</span>
+
+<span class="comment"># Who you are</span>
+You are [persona / role / context].
+You serve [who you work with and what they need].
+
+<span class="comment"># How you think</span>
+Your approach is [methodology / framework / standards].
+You always [core behaviour 1].
+You always [core behaviour 2].
+
+<span class="comment"># What you must always do</span>
+- [Non-negotiable behaviour A]
+- [Non-negotiable behaviour B]
+- [Non-negotiable behaviour C]
+
+<span class="comment"># What you must never do</span>
+- [Hard boundary 1]
+- [Hard boundary 2]</pre>
+    </div>
+
+    <p>That's the full structure. The sophistication isn't in the format — it's in the quality of the answers you put into it. Section 05 covers exactly what those answers should be.</p>
+
+    <h3>How to upload a skill to Claude</h3>
+    <p>Save your skill file as <code style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);background:var(--bg-code);padding:2px 6px;border-radius:3px;">skill-name.md</code>. In Claude, go to <strong>Projects</strong> → create a new project → upload the file under Project Instructions. Every conversation you start inside that project runs with your skill active automatically.</p>
+
+    <div class="callout">
+      <div class="callout-label">One skill, one purpose</div>
+      <p>Build separate skills for separate contexts. A skill for writing LinkedIn content shouldn't also be your research verification skill — the instructions will conflict. Keep them focused, and load the right one for the task at hand.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- 04 -->
+  <div class="nb-section" id="s04">
+    <div class="section-num">Section 04</div>
+    <h2>Build your first skill — step by step.</h2>
+    <p>This takes 30 minutes. You'll need a text editor (Notes, Word, Google Docs — anything that saves plain text) and a Claude account. Follow these five steps in order.</p>
+
+    <h3>Step 1 — Answer the five questions</h3>
+    <p>Before you write a single line of the skill file, answer these questions in plain language. Don't overthink them. You're not writing for an audience — you're briefing an AI:</p>
+    <p><strong>Who are you?</strong> Your role, your business, what you actually do day to day.<br>
+    <strong>Who do you serve?</strong> Your clients or audience — their profile, their sophistication, what they care about.<br>
+    <strong>How do you think?</strong> Your methodology, your standards, what makes your work different from the generic version.<br>
+    <strong>What must this AI always do?</strong> The non-negotiables — cite sources, push back on weak claims, use your tone, whatever matters most.<br>
+    <strong>What must this AI never do?</strong> The hard lines — no corporate jargon, no unsourced statistics, no passive voice, whatever you can't stand.</p>
+
+    <h3>Step 2 — Write the skill file</h3>
+    <p>Open a new document. Use the template from Section 03. Fill in each section using your answers from Step 1. Write in plain English, in the second person — "You are...", "You always...", "You never...". Claude reads instructions best when they're direct and specific.</p>
+
+    <h3>Step 3 — Package it</h3>
+    <p>Save the file with a <code style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);background:var(--bg-code);padding:2px 6px;border-radius:3px;">.md</code> extension — for example, <code style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);background:var(--bg-code);padding:2px 6px;border-radius:3px;">linkedin-writing.md</code>. If you have multiple skills, put them in a folder and zip it.</p>
+
+    <h3>Step 4 — Upload to Claude</h3>
+    <p>In Claude.ai: go to <strong>Projects</strong> in the left sidebar → <strong>New Project</strong> → give it a name → under <strong>Project Instructions</strong>, upload your skill file. Every conversation you start in this project will run with your skill active.</p>
+
+    <h3>Step 5 — Test with a real conversation</h3>
+    <p>Don't test with a toy example. Use something you'd actually ask — a real piece of content you need to write, a real strategic question you're sitting on. Notice where the AI's response feels different from what a blank Claude would give you. That difference is the skill working.</p>
+
+    <div class="callout">
+      <div class="callout-label">If the output still feels generic</div>
+      <p>Your instructions are probably too vague. "Be professional" means nothing. "Write at a senior executive register, no bullet points in persuasive sections, always lead with the reader's problem not your solution" — that means something. Go back to the skill file and make the instructions more specific.</p>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- 05 -->
+  <div class="nb-section" id="s05">
+    <div class="section-num">Section 05</div>
+    <h2>The five questions every useful skill must answer.</h2>
+    <p>These aren't just the five questions from Step 1 — they're the diagnostic framework for any skill that doesn't perform the way you expected. If a skill produces output that feels off, it's almost always because one of these five questions wasn't answered specifically enough.</p>
+
+    <ul class="questions-list">
+      <li>
+        <span class="q-num">1</span>
+        <div class="q-text">
+          <h4>Who am I?</h4>
+          <p>The AI needs a role and a context, not just a job title. "Marketing consultant" is not enough. "A Hong Kong-born marketing consultant operating across London and HK, working primarily with SME owners who are technically literate but marketing-novice" — that's a briefing.</p>
+          <p class="example">Bad: "You are a marketing expert." Good: "You are a senior marketing consultant with 10+ years in Martech, advising SME founders who are growth-focused but time-poor."</p>
+        </div>
+      </li>
+      <li>
+        <span class="q-num">2</span>
+        <div class="q-text">
+          <h4>Who do I serve?</h4>
+          <p>The AI needs to understand your audience as specifically as you do. Their sophistication level, their vocabulary, their objections, what they respond to. This shapes every sentence it writes on your behalf.</p>
+          <p class="example">Bad: "Business owners." Good: "Established SME owners in London and HK who've outgrown generic advice and respond to specificity, data, and directness — not inspiration."</p>
+        </div>
+      </li>
+      <li>
+        <span class="q-num">3</span>
+        <div class="q-text">
+          <h4>How do I think?</h4>
+          <p>Your methodology. Your framework. How you approach a problem differently from the default. This is the hardest question to answer well — and the most valuable to get right. If you have a proprietary approach, encode it here.</p>
+          <p class="example">Bad: "I use a strategic approach." Good: "I apply the REAL framework — Research, Evaluate, Automate, Long-lasting. Every recommendation must map to a stage."</p>
+        </div>
+      </li>
+      <li>
+        <span class="q-num">4</span>
+        <div class="q-text">
+          <h4>What must this always do?</h4>
+          <p>The non-negotiables. These are the behaviours that define quality in your context. Be specific enough that violating them would produce something you'd be embarrassed to send.</p>
+          <p class="example">Bad: "Always be professional." Good: "Always cite the source of any statistic. Always distinguish between a growth rate and an absolute figure. Flag any claim that relies on a single study."</p>
+        </div>
+      </li>
+      <li>
+        <span class="q-num">5</span>
+        <div class="q-text">
+          <h4>What must this never do?</h4>
+          <p>The hard lines. Things that would make you immediately distrust the output. Often these are stylistic — passive voice, corporate filler, excessive hedging — or substantive: never recommend a tool you haven't tested, never lead with price.</p>
+          <p class="example">Bad: "Don't be generic." Good: "Never use the phrases 'leverage', 'synergy', or 'game-changer'. Never open a post with 'I' as the first word. Never present a recommendation without a reason."</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- 06 -->
+  <div class="nb-section" id="s06">
+    <div class="section-num">Section 06</div>
+    <h2>What a professional AI toolkit looks like at the ceiling.</h2>
+
+    <p>The skill you built in Section 04 is a foundation. It handles one context well. A professional toolkit has multiple skills working together — each optimised for a specific domain — so your AI performs at a high level whether you're writing content, doing research, preparing for a client meeting, or managing your pipeline.</p>
+
+    <p>Here's what that looks like in practice. These are the four capability domains where a configured AI makes the biggest difference for SME owners and professionals:</p>
+
+    <div class="cap-grid">
+      <div class="cap-card">
+        <h4>Research verification</h4>
+        <p>Flags weak claims, distinguishes data from inference, identifies single-study figures, surfaces conflicting sources. Stops you from publishing something that a well-informed reader will immediately distrust.</p>
+      </div>
+      <div class="cap-card">
+        <h4>Platform intelligence</h4>
+        <p>Verifies current algorithm behaviour before writing any social content. What worked on LinkedIn six months ago may actively suppress reach today. A skill that checks before it writes keeps you current without the maintenance.</p>
+      </div>
+      <div class="cap-card">
+        <h4>Production standards</h4>
+        <p>Applies your voice, your format rules, your rationale requirements, and your quality bar consistently across every piece of output — whether you're writing a post, a proposal, or a client email.</p>
+      </div>
+      <div class="cap-card">
+        <h4>Source-lock mode</h4>
+        <p>Limits the AI's reference to documents you provide — your client brief, your proposal, your research. Prevents the AI from filling gaps with inference. Critical for client-facing work where accuracy is non-negotiable.</p>
+      </div>
+    </div>
+
+    <h3>Building these yourself vs. starting from a professional set</h3>
+    <p>You can build each of these from scratch using the framework in this notebook. Each takes 30–60 minutes to build well and several iterations to refine. Most professionals find that the research verification and platform intelligence skills are the hardest to get right — they require specificity about what counts as a credible source, how to handle conflicting data, and what the current platform rules actually are.</p>
+
+    <p>The alternative is to start with a professionally-built set and customise from there. The <strong>Thinking Partner Pack</strong> contains three of the four skills above — research verification, platform intelligence, and production standards — built and tested across V8 Global's own client work.</p>
+
+    <div class="callout">
+      <div class="callout-label">What's in the Thinking Partner Pack</div>
+      <p><strong>research-verification</strong> — flags weak claims, labels inferences, surfaces conflicting data, requires source attribution on every statistic.<br><br>
+      <strong>sns-platform-research</strong> — checks current algorithm rules before writing any social content. LinkedIn, Instagram, and more — updated methodology, not cached assumptions.<br><br>
+      <strong>content-production-standards</strong> — applies rationale blocks, production-ready formatting, and consistent quality standards to everything it produces.</p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>Ready to go further?</h2>
+    <p>The Thinking Partner Pack gives you three professional skills, ready to deploy. Start with the foundation — upgrade as your needs grow.</p>
+    <div class="cta-pack-details">
+      <span class="pack-item"><strong>3 skills</strong> — research, platform, production</span>
+      <span class="pack-item"><strong>£49</strong> one-time</span>
+      <span class="pack-item"><strong>Annual updates</strong> at same price</span>
+    </div>
+    <a class="btn-cta" href="https://www.v8gp.co.uk" target="_blank">Get the Thinking Partner Pack →</a>
+    <p class="cta-note">Delivered as a .zip file. Upload to Claude Projects in under 5 minutes. Questions? Email <a href="mailto:info@v8gp.co.uk" style="color:var(--text-faint);">info@v8gp.co.uk</a></p>
+  </div>
+
+</main>
+</div>
+
+<script>
+// Active nav highlight on scroll
+const sections = document.querySelectorAll('.nb-section, .cover');
+const navLinks = document.querySelectorAll('.nav-items a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      navLinks.forEach(l => l.classList.remove('active'));
+      const id = entry.target.id;
+      const active = document.querySelector(`.nav-items a[href="#${id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, {threshold:0.3, rootMargin:'-10% 0px -60% 0px'});
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

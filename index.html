@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="V8 Global — AI-powered marketing and business operating systems for SME owners and entrepreneurs in London and Hong Kong.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="V8 Global — AI Strategy & Business Operating Systems">
+<meta property="og:description" content="Bridging high-trust networks with intelligent business systems. London and Hong Kong.">
+<meta property="og:url" content="https://www.v8gp.co.uk">
+<title>V8 Global — AI Strategy & Business Operating Systems</title>
+<link rel="canonical" href="https://www.v8gp.co.uk/">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#c9a84c;
+  --gold-dim:rgba(201,168,76,0.12);
+  --gold-border:rgba(201,168,76,0.25);
+  --bg:#0a0d14;
+  --bg2:#111520;
+  --bg3:#0d1018;
+  --text:#f0ede6;
+  --text-mid:#a8a49c;
+  --text-dim:#6e6b64;
+  --text-faint:#3a3830;
+  --border:rgba(240,237,230,0.08);
+  --border-light:rgba(240,237,230,0.12);
+  --max:1000px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:15px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;
+  background:rgba(10,13,20,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:0.5px solid var(--border);
+  padding:0 40px;
+  height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  text-decoration:none;
+}
+.nav-v8{
+  font-size:12px;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--text-dim);
+}
+.nav-sep{width:1px;height:14px;background:var(--border-light)}
+.nav-nexus{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:600;
+  color:var(--text);letter-spacing:0.06em;
+  position:relative;
+}
+.nav-nexus::after{
+  content:'GLOBAL';
+  font-family:'DM Sans',sans-serif;
+  font-size:10px;font-weight:500;
+  letter-spacing:0.14em;
+  color:var(--gold);
+  position:absolute;
+  bottom:-8px;left:0;
+  text-transform:uppercase;
+}
+.nav-links{
+  display:flex;align-items:center;gap:28px;
+  list-style:none;
+}
+.nav-links a{
+  font-size:13px;font-weight:400;
+  color:var(--text-dim);
+  text-decoration:none;
+  letter-spacing:0.02em;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  background:var(--gold);color:#0a0d14;
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;font-weight:500;
+  padding:8px 20px;border-radius:3px;
+  text-decoration:none;
+  transition:opacity 0.2s;
+}
+.nav-cta:hover{opacity:0.85;color:#0a0d14}
+.nav-mobile-btn{
+  display:none;
+  background:none;border:none;
+  color:var(--text-dim);font-size:20px;cursor:pointer;
+  padding:4px;
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:0;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('/assets/img/hero-banner.jpg');
+  background-size:cover;background-position:center 25%;
+  z-index:0;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    105deg,
+    rgba(8,9,15,0.92) 0%,
+    rgba(8,9,15,0.80) 45%,
+    rgba(8,9,15,0.55) 100%
+  );
+  z-index:1;
+}
+.hero-inner{
+  position:relative;z-index:2;
+  max-width:var(--max);
+  margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+  padding:120px 40px 80px;
+}
+.hero-badge{
+  display:inline-block;
+  font-size:11px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);
+  border:0.5px solid var(--gold);
+  padding:4px 14px;border-radius:20px;
+  margin-bottom:24px;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:52px;font-weight:600;
+  line-height:1.12;color:var(--text);
+  margin-bottom:22px;
+}
+.hero h1 em{
+  color:var(--gold);font-style:italic;
+}
+.hero-sub{
+  font-size:16px;font-weight:300;
+  color:var(--text-mid);line-height:1.8;
+  max-width:440px;margin-bottom:36px;
+}
+.hero-cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn-gold{
+  background:var(--gold);color:#0a0d14;
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:500;
+  padding:13px 28px;border-radius:4px;
+  text-decoration:none;display:inline-block;
+  transition:opacity 0.2s;border:none;cursor:pointer;
+}
+.btn-gold:hover{opacity:0.85}
+.btn-outline{
+  background:transparent;color:var(--gold);
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;font-weight:400;
+  padding:13px 28px;border-radius:4px;
+  border:0.5px solid var(--gold);
+  text-decoration:none;display:inline-block;
+  transition:background 0.2s;
+}
+.btn-outline:hover{background:var(--gold-dim)}
+.hero-stats{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;
+}
+.stat-card{
+  background:var(--bg2);
+  border:0.5px solid var(--border);
+  padding:28px 24px;
+}
+.stat-card:first-child{border-radius:8px 0 0 0}
+.stat-card:nth-child(2){border-radius:0 8px 0 0}
+.stat-card:nth-child(3){border-radius:0 0 0 8px}
+.stat-card:last-child{border-radius:0 0 8px 0}
+.stat-num{
+  font-family:'Playfair Display',serif;
+  font-size:36px;font-weight:600;
+  color:var(--gold);margin-bottom:6px;
+  line-height:1;
+}
+.stat-label{
+  font-size:12px;font-weight:400;
+  color:var(--text-dim);
+  letter-spacing:0.04em;line-height:1.5;
+}
+
+/* ── PARTNERS STRIP ── */
+.partners-strip{
+  border-top:0.5px solid var(--border);
+  border-bottom:0.5px solid var(--border);
+  padding:16px 40px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.partners-strip-label{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text-faint);white-space:nowrap;
+}
+.partner-pill{
+  font-size:12px;color:var(--text-dim);
+  border:0.5px solid var(--border-light);
+  padding:4px 14px;border-radius:3px;
+}
+
+/* ── SECTIONS ── */
+.section{
+  padding:80px 40px;
+  border-bottom:0.5px solid var(--border);
+}
+.section-inner{max-width:var(--max);margin:0 auto}
+.section-label{
+  font-size:11px;font-weight:500;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:34px;font-weight:600;
+  color:var(--text);margin-bottom:14px;line-height:1.25;
+}
+.section-sub{
+  font-size:15px;color:var(--text-mid);
+  line-height:1.8;max-width:560px;
+  margin-bottom:48px;font-weight:300;
+}
+
+/* ── WHAT WE DO ── */
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;margin-bottom:48px;
+}
+.service-card{
+  background:var(--bg2);
+  border:0.5px solid var(--border);
+  padding:32px 28px;
+  transition:border-color 0.2s;
+  text-decoration:none;display:block;
+}
+.service-card:hover{border-color:var(--gold-border)}
+.service-icon{
+  font-size:24px;margin-bottom:18px;display:block;
+}
+.service-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-weight:600;
+  color:var(--text);margin-bottom:10px;
+}
+.service-card p{
+  font-size:13px;color:var(--text-dim);
+  line-height:1.7;font-weight:300;margin-bottom:20px;
+}
+.service-link{
+  font-size:12px;font-weight:500;
+  color:var(--gold);letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+/* ── DESTINATIONS ── */
+.destinations{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.dest-card{
+  background:var(--bg2);
+  border:0.5px solid var(--border);
+  border-radius:6px;padding:36px 32px;
+  text-decoration:none;display:block;
+  transition:border-color 0.25s,background 0.25s;
+  position:relative;overflow:hidden;
+}
+.dest-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s;
+}
+.dest-card:hover{
+  border-color:var(--gold-border);
+  background:#13182a;
+}
+.dest-card:hover::before{transform:scaleX(1)}
+.dest-eyebrow{
+  font-size:10px;font-weight:500;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.dest-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:24px;font-weight:600;
+  color:var(--text);margin-bottom:10px;line-height:1.2;
+}
+.dest-card p{
+  font-size:13px;color:var(--text-dim);
+  line-height:1.7;font-weight:300;margin-bottom:20px;
+}
+.dest-arrow{
+  font-size:18px;color:var(--gold);
+  display:inline-block;
+  transition:transform 0.2s;
+}
+.dest-card:hover .dest-arrow{transform:translateX(4px)}
+
+/* ── METHODOLOGY ── */
+.method-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;
+}
+.method-card{
+  background:var(--bg2);
+  border:0.5px solid var(--border);
+  padding:28px 22px;
+}
+.method-letter{
+  font-family:'Playfair Display',serif;
+  font-size:48px;font-weight:600;
+  color:var(--gold);opacity:0.3;
+  line-height:1;margin-bottom:14px;
+}
+.method-card h4{
+  font-size:14px;font-weight:500;
+  color:var(--text);margin-bottom:8px;
+}
+.method-card p{
+  font-size:12px;color:var(--text-dim);
+  line-height:1.65;font-weight:300;
+}
+
+/* ── PEOPLE ── */
+.people-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.person-card{
+  background:var(--bg2);
+  border:0.5px solid var(--border);
+  border-radius:6px;
+  padding:32px 28px;
+  display:grid;grid-template-columns:auto 1fr;
+  gap:20px;align-items:start;
+}
+.person-avatar{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--gold-dim);
+  border:1px solid var(--gold-border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:18px;color:var(--gold);
+  flex-shrink:0;
+}
+.person-name{
+  font-family:'Playfair Display',serif;
+  font-size:18px;font-weight:600;
+  color:var(--text);margin-bottom:3px;
+}
+.person-role{
+  font-size:12px;color:var(--gold);
+  font-weight:400;letter-spacing:0.04em;
+  margin-bottom:10px;
+}
+.person-bio{
+  font-size:13px;color:var(--text-dim);
+  line-height:1.7;font-weight:300;
+}
+
+/* ── FOOTER ── */
+footer{
+  padding:40px 40px;
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:16px;
+  max-width:100%;
+}
+.footer-inner{
+  max-width:var(--max);margin:0 auto;width:100%;
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:16px;
+}
+.footer-left p{
+  font-size:12px;color:var(--text-faint);font-weight:300;
+}
+.footer-links{
+  display:flex;gap:20px;list-style:none;
+}
+.footer-links a{
+  font-size:12px;color:var(--text-faint);
+  text-decoration:none;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--gold)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .nav-mobile-btn{display:block}
+  .hero-inner{grid-template-columns:1fr;gap:48px;padding:90px 24px 60px;}
+  .hero-inner{grid-template-columns:1fr;gap:48px}
+  .hero h1{font-size:36px}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .partners-strip{padding:14px 24px}
+  .section{padding:56px 24px}
+  .services-grid{grid-template-columns:1fr}
+  .destinations{grid-template-columns:1fr}
+  .method-grid{grid-template-columns:1fr 1fr}
+  .people-grid{grid-template-columns:1fr}
+  footer{padding:28px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <span class="nav-v8">V8</span>
+    <div class="nav-sep"></div>
+    <span class="nav-nexus">Global</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/nexus/">V8 Nexus</a></li>
+    <li><a href="/axia/">Axia</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="https://v8gp.com/resources" target="_blank">Blog</a></li>
+  </ul>
+  <a class="nav-cta" href="/nexus/#join">Join the community</a>
+  <button class="nav-mobile-btn" onclick="toggleMobileNav()" aria-label="Menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">London · Hong Kong · International</div>
+      <h1>Business intelligence<br>that <em>actually</em><br>moves things.</h1>
+      <p class="hero-sub">V8 Global builds the networks, systems, and AI infrastructure that help SME owners and entrepreneurs grow faster — without the overhead of a full marketing team.</p>
+      <div class="hero-cta-row">
+        <a class="btn-gold" href="/nexus/">Join V8 Nexus</a>
+        <a class="btn-outline" href="/axia/">Meet Axia</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years of Martech expertise</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">700+</div>
+        <div class="stat-label">SME clients served</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Global offices</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">5K+</div>
+        <div class="stat-label">Newsletter subscribers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<div class="partners-strip">
+  <span class="partners-strip-label">Partners</span>
+  <span class="partner-pill">iFast Bank</span>
+  <span class="partner-pill">Hongkonger Magazine</span>
+  <span class="partner-pill">V8 Nexus</span>
+</div>
+
+<!-- WHAT WE DO -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">What V8 Global builds</div>
+    <div class="section-title">Three things. Done properly.</div>
+    <p class="section-sub">Not a sprawling agency. Not a software vendor. V8 Global runs three focused offerings — each designed to solve a specific problem SME owners actually have.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">🤝</span>
+        <h3>Executive Community</h3>
+        <p>V8 Nexus — a curated network of London's business leaders and professionals. High-trust relationships, practical AI seminars, and intelligent introductions.</p>
+        <span class="service-link">V8 Nexus →</span>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">⚙️</span>
+        <h3>AI Business Systems</h3>
+        <p>Axia — an AI operating system that monitors your inbox, manages your pipeline, drafts outreach, and keeps your CRM current. Built for SME owners, not enterprise teams.</p>
+        <span class="service-link">Axia →</span>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🌏</span>
+        <h3>Cross-Border Growth</h3>
+        <p>Founded in Hong Kong with a strong UK presence. We help UK brands enter Asian markets and Asian companies establish in the UK — with the cultural fluency to do it properly.</p>
+        <span class="service-link">Learn more →</span>
+      </div>
+    </div>
+
+    <!-- Destination cards -->
+    <div class="destinations">
+      <a class="dest-card" href="/nexus/">
+        <div class="dest-eyebrow">Community</div>
+        <h3>V8 Nexus</h3>
+        <p>London's curated executive circle. Connect with the right people, access practical AI intelligence, and accelerate your business goals — without the noise of general networking.</p>
+        <span class="dest-arrow">→</span>
+      </a>
+      <a class="dest-card" href="/axia/">
+        <div class="dest-eyebrow">Technology</div>
+        <h3>Axia</h3>
+        <p>Your AI business operating system. Handles email intelligence, CRM sync, meeting briefs, and content production — so you run the business instead of being run by it.</p>
+        <span class="dest-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- METHODOLOGY -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">How we work</div>
+    <div class="section-title">The REAL approach.</div>
+    <p class="section-sub">Four principles that run through every engagement — from community events to Axia deployments.</p>
+    <div class="method-grid">
+      <div class="method-card">
+        <div class="method-letter">R</div>
+        <h4>Research</h4>
+        <p>AI-driven audience insights and competitive analysis before any execution.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-letter">E</div>
+        <h4>Evaluate</h4>
+        <p>Rapid validation through precise testing — find what works before scaling it.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-letter">A</div>
+        <h4>Automate</h4>
+        <p>Systematise what works. Automated pipelines that run without your attention.</p>
+      </div>
+      <div class="method-card">
+        <div class="method-letter">L</div>
+        <h4>Long-lasting</h4>
+        <p>IP establishment and continuous improvement. Built to compound over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PEOPLE -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">The team</div>
+    <div class="section-title">Built by practitioners.</div>
+    <p class="section-sub">V8 Global is run by people who use these systems in their own business every day.</p>
+    <div class="people-grid">
+      <div class="person-card">
+        <div class="person-avatar">AL</div>
+        <div>
+          <div class="person-name">Alan Law</div>
+          <div class="person-role">Founder & Managing Director</div>
+          <p class="person-bio">Marketing technologist and entrepreneur with 10+ years building Martech systems across Hong Kong and the UK. Architect of Axia and the V8 Global methodology. Operates across HK, London, and internationally.</p>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="person-avatar">GC</div>
+        <div>
+          <div class="person-name">Gina Cheng</div>
+          <div class="person-role">Community Lead, V8 Nexus</div>
+          <p class="person-bio">LinkedIn strategist, personal branding specialist, and community curator. Leads V8 Nexus and the personal branding course. Known for turning professional networks into real business relationships.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <p>© 2026 V8 Global Company Limited. London · Hong Kong · International.</p>
+      <p style="margin-top:4px;">Registered in Hong Kong. <a href="mailto:info@v8gp.co.uk" style="color:var(--text-faint);text-decoration:none;">info@v8gp.co.uk</a></p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/nexus/">V8 Nexus</a></li>
+      <li><a href="/axia/">Axia</a></li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="https://v8gp.com/resources" target="_blank">Blog</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+function toggleMobileNav(){
+  const links = document.querySelector('.nav-links');
+  if(links.style.display === 'flex'){
+    links.style.display = 'none';
+  } else {
+    links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(10,13,20,0.98);padding:24px 24px;gap:20px;border-bottom:0.5px solid rgba(240,237,230,0.08);z-index:99;';
+  }
+}
+</script>
+</body>
+</html>

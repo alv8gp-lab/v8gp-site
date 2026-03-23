@@ -1,0 +1,23 @@
+# wrangler.toml — Cloudflare Worker config for V8 Nexus signup proxy
+# Deploy: npx wrangler deploy
+# Docs: https://developers.cloudflare.com/workers/
+
+name = "v8gp-nexus-signup"
+main = "worker.js"
+compatibility_date = "2026-03-22"
+
+# Routes — api.v8gp.co.uk is a separate subdomain from nexus.v8gp.co.uk
+# Both work once Cloudflare manages v8gp.co.uk DNS
+# Wix at v8gp.co.uk is unaffected — this Worker only handles /nexus-signup
+[[routes]]
+pattern = "api.v8gp.co.uk/nexus-signup"
+zone_name = "v8gp.co.uk"
+
+# Environment variables — set SECRETS via Cloudflare dashboard
+# npx wrangler secret put CLICKUP_API_KEY
+# npx wrangler secret put CLICKUP_LIST_ID
+# npx wrangler secret put RECAPTCHA_SECRET
+# npx wrangler secret put ALLOWED_ORIGIN
+
+[vars]
+ALLOWED_ORIGIN = "https://www.v8gp.co.uk"
